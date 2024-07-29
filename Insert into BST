@@ -1,0 +1,13 @@
+Node* insertIntoBST(Node* &root, int d){
+        if(root==NULL){
+            Node* root=new(d);
+            return root;
+        }
+        if(d>root->data){
+            root->right=insertIntoBST(root->right, d);
+        }
+        if(d<root->data){
+            root->left=insertIntoBST(root->left, d);
+        }
+        return root;
+    }
