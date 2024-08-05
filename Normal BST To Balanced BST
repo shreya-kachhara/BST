@@ -1,0 +1,28 @@
+void inorder(TreeNode<int>* root, vector<int> &v){
+        if(root==NULL){
+            return ;
+        }
+        inorder(root->left, v);
+        v.push_back(root->data);
+        inorder(root->right, v);
+    }
+
+TreeNode<int>* solve(int start, int end, vector<int> &v){
+    int mid=start+(end-start)/2;
+    
+    if(start>end){
+        return NULL;
+    }
+    TreeNode<int>* temp= new TreeNode<int>(v[mid]);
+    temp->left=solve(start, mid-1, v);
+    temp->right=solve(mid+1, end, v);
+    return temp;
+}
+
+TreeNode<int>* balancedBst(TreeNode<int>* root) {
+    vector<int> v;
+    inorder(root, v);
+    int start=0, end=v.size()-1;
+    return solve(start, end, v);
+
+}
